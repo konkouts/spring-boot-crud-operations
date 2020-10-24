@@ -36,4 +36,19 @@ public class UserController {
     public void deleteUser(@PathVariable String id) {
         userRepository.deleteById(id);
     }
+
+    @PutMapping("/users/{id}")
+    public ResponseEntity<Object> updateStudent(@RequestBody User user, @PathVariable String id) {
+
+        Optional<User> userOptional = userRepository.findById(id);
+
+        if (!userOptional.isPresent())
+            return ResponseEntity.notFound().build();
+
+        user.setUserId(id);
+
+        userRepository.save(user);
+
+        return ResponseEntity.noContent().build();
+    }
 }
