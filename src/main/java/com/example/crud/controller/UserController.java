@@ -22,4 +22,9 @@ public class UserController {
         return "user created "+ insertedUser.getUsername();
     }
 
+    @GetMapping(value = "/all")
+    public List<User> getAllUsers(){
+        return userRepository.findAll();
+    }
+
 }
